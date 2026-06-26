@@ -312,6 +312,7 @@
 
   window.InputHandler = {
     setupZeroTapTimer: setupZeroTapTimer,
-    clearZeroTapTimer: clearZeroTapTimer
+    clearZeroTapTimer: clearZeroTapTimer,
+    handleAnswer: handleAnswer
   };
 })();

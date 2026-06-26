@@ -77,6 +77,18 @@
       }
     } else if (currentPuzzle.type === 'shake') {
       isCorrect = userAnswer === 'shake';
+    } else if (currentPuzzle.type === 'visual') {
+      // Visual puzzles: check interaction type
+      var visualInt = currentPuzzle.visual && currentPuzzle.visual.interaction;
+      if (visualInt && visualInt.type === 'tap-count') {
+        // Tap-count: compare numeric counts
+        var visualTapReq = parseInt(currentPuzzle.answer.en, 10);
+        var visualUserTaps = parseInt(userAnswer, 10);
+        isCorrect = visualUserTaps >= visualTapReq;
+      } else {
+        // Tap-correct or default: text match
+        isCorrect = normalizeAnswer(userAnswer) === normalizeAnswer(correctAnswer);
+      }
     } else {
       // text or choice: normalize and compare
       isCorrect = normalizeAnswer(userAnswer) === normalizeAnswer(correctAnswer);

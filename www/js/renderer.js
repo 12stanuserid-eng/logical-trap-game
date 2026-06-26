@@ -81,12 +81,14 @@
     var choiceGroup = document.getElementById('input-choice-group');
     var tapGroup = document.getElementById('input-tap-group');
     var shakeGroup = document.getElementById('input-shake-group');
+    var visualGroup = document.getElementById('input-visual-group');
 
     // Hide all
     textGroup.style.display = 'none';
     choiceGroup.style.display = 'none';
     tapGroup.style.display = 'none';
     shakeGroup.style.display = 'none';
+    if (visualGroup) visualGroup.style.display = 'none';
 
     if (puzzle.type === 'choice') {
       choiceGroup.style.display = 'flex';
@@ -99,6 +101,13 @@
       }
     } else if (puzzle.type === 'shake') {
       shakeGroup.style.display = 'flex';
+    } else if (puzzle.type === 'visual') {
+      if (visualGroup) {
+        visualGroup.style.display = 'flex';
+        if (window.VisualRenderer) {
+          window.VisualRenderer.renderVisualScene(puzzle);
+        }
+      }
     } else {
       textGroup.style.display = 'flex';
       var input = document.getElementById('answer-input');
