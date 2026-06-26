@@ -171,6 +171,19 @@
   </div>
 
   <script>
+    // Initialize GameState with defaults before any game script runs
+    window.GameState = {
+      score: 0,
+      hintsRemaining: 3,
+      lives: 3,
+      streak: 0,
+      currentLevel: 0,
+      completedLevels: [],
+      totalLevels: 0,
+      settings: { language: 'en', sound: true }
+    };
+  </script>
+  <script>
     // Service Worker registration
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {

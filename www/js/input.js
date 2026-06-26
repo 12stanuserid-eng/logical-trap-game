@@ -217,6 +217,11 @@
           window.Renderer.renderSettings();
           // Re-translate static elements
           window.i18n.applyTranslations();
+          // Re-render game screen if user is currently on it
+          var gameScreen = document.getElementById('game-screen');
+          if (gameScreen && gameScreen.classList.contains('active')) {
+            window.Renderer.renderGame();
+          }
         }
       });
     });
