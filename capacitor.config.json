@@ -1,8 +1,7 @@
 {
   "appId": "com.logicaltrap.game",
   "appName": "Logical Trap",
-  "webDir": ".",
-  "bundledWebRuntime": false,
+  "webDir": "www",
   "server": {
     "androidScheme": "https",
     "allowNavigation": []
