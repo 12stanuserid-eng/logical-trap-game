@@ -93,6 +93,10 @@
       renderChoices(puzzle, lang, choiceGroup);
     } else if (puzzle.type === 'tap') {
       tapGroup.style.display = 'flex';
+      // Trigger any special tap-puzzle mechanics (e.g. 0-tap timer)
+      if (window.InputHandler && window.InputHandler.setupZeroTapTimer) {
+        window.InputHandler.setupZeroTapTimer(puzzle);
+      }
     } else if (puzzle.type === 'shake') {
       shakeGroup.style.display = 'flex';
     } else {
@@ -110,8 +114,11 @@
     options.forEach(function(opt, idx) {
       var btn = document.createElement('button');
       btn.className = 'choice-btn';
-      btn.textContent = String.fromCharCode(65 + idx) + '. ' + opt;
-      btn.setAttribute('data-value', opt);
+      // Support both bilingual objects {en, hi} and plain strings
+      var displayText = (typeof opt === 'object' && opt !== null) ? (opt[lang] || opt.en || '') : opt;
+      var dataValue = (typeof opt === 'object' && opt !== null) ? (opt[lang] || opt.en || '') : opt;
+      btn.textContent = String.fromCharCode(65 + idx) + '. ' + displayText;
+      btn.setAttribute('data-value', dataValue);
       container.appendChild(btn);
     });
   }

@@ -4,6 +4,27 @@
   var currentTapCount = 0;
   var tapRequired = 0;
   var shakeSimulated = false;
+  var zeroTapTimer = null;
+
+  function clearZeroTapTimer() {
+    if (zeroTapTimer) {
+      clearTimeout(zeroTapTimer);
+      zeroTapTimer = null;
+    }
+  }
+
+  function setupZeroTapTimer(puzzle) {
+    clearZeroTapTimer();
+    if (puzzle && puzzle.type === 'tap') {
+      var needed = parseInt(puzzle.answer.en, 10);
+      if (needed === 0) {
+        zeroTapTimer = setTimeout(function() {
+          zeroTapTimer = null;
+          handleAnswer('0');
+        }, 8000);
+      }
+    }
+  }
 
   function init() {
     bindWelcomeScreen();
@@ -136,6 +157,7 @@
   }
 
   function handleTap() {
+    clearZeroTapTimer();
     var puzzle = window.GameEngine.getCurrentPuzzle();
     if (!puzzle) return;
 
@@ -289,6 +311,7 @@
   }
 
   window.InputHandler = {
-    // Public API if needed
+    setupZeroTapTimer: setupZeroTapTimer,
+    clearZeroTapTimer: clearZeroTapTimer
   };
 })();
