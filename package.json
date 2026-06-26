@@ -1,0 +1,20 @@
+{
+  "name": "logical-trap-game",
+  "version": "1.0.0",
+  "description": "Logical Trap - Brain Puzzle Game (APK)",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Web build complete'",
+    "cap:sync": "npx cap sync",
+    "cap:add:android": "npx cap add android",
+    "cap:open:android": "npx cap open android",
+    "apk:build": "cd android && ./gradlew assembleDebug"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.1.0",
+    "@capacitor/core": "^6.1.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.1.0"
+  }
+}
